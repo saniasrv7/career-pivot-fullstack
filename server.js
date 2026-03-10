@@ -85,7 +85,7 @@ Return ONLY valid JSON matching this exact structure. No markdown, no explanatio
       "category": "<e.g. Courses>",
       "title": "<section title>",
       "items": [
-        { "icon": "<single emoji>", "name": "<resource name>", "desc": "<what it is and why it helps, 1 sentence>", "tag": "<free|paid|community|book>" }
+        { "icon": "<single emoji>", "name": "<resource name>", "url": "<direct URL to the resource>", "desc": "<what it is and why it helps, 1 sentence>", "tag": "<free|paid|community|book>" }
       ]
     }
   ]
@@ -101,7 +101,7 @@ Rules (keep concise):
 - honest.good: exactly 3 items, 1-2 sentences each
 - honest.hard: exactly 3 items, 1-2 sentences each  
 - honest.truth: max 3 sentences
-- resources: exactly 3 categories, exactly 3 items each, desc under 15 words
+- resources: exactly 3 categories, exactly 3 items each, desc under 15 words, include real working URLs for each resource
 - Be specific to "${from}" to "${to}" but keep all text concise`;
 
   try {
