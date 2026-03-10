@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { RESOURCE_LIBRARY, getRelevantResources } from './resourceLibrary.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -22,7 +23,17 @@ app.post('/api/analyse-pivot', async (req, res) => {
     return res.status(400).json({ error: 'Missing from or to role' });
   }
 
+  // Get curated resources relevant to this career pivot
+  const availableResources = getRelevantResources(from, to);
+  const resourcesJSON = JSON.stringify(availableResources, null, 2);
+
   const prompt = `You are an expert career coach and talent strategist. Analyse a career pivot from "${from}" to "${to}".
+
+IMPORTANT: For the resources section, you MUST select exactly 9 resources from this curated list (choose the most relevant ones for this specific career transition):
+
+${resourcesJSON}
+
+Select 9 resources and organize them into exactly 3 categories with 3 items each. Use the exact name, url, desc, tag, and icon from the list above.
 
 Return ONLY valid JSON matching this exact structure. No markdown, no explanation, just the JSON object.
 
@@ -101,7 +112,7 @@ Rules (keep concise):
 - honest.good: exactly 3 items, 1-2 sentences each
 - honest.hard: exactly 3 items, 1-2 sentences each  
 - honest.truth: max 3 sentences
-- resources: exactly 3 categories, exactly 3 items each, desc under 15 words, include real working URLs for each resource
+- resources: exactly 3 categories, exactly 3 items each (9 total), MUST select from the curated list provided above, copy name/url/desc/tag/icon exactly
 - Be specific to "${from}" to "${to}" but keep all text concise`;
 
   try {
