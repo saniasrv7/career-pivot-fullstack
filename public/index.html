@@ -220,9 +220,8 @@ nav{position:sticky;top:0;z-index:100;padding:18px 48px;display:flex;justify-con
 .error-box{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:20px;padding:24px 28px;margin-top:20px;display:none;}
 .error-box.show{display:block;}
 .error-box p{font-size:15px;color:#DC2626;font-weight:300;line-height:1.7;}
-.demo-banner{background:rgba(255,179,71,0.12);border:1px solid rgba(245,158,11,0.3);border-radius:16px;padding:14px 20px;margin-top:16px;display:flex;align-items:center;gap:12px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;color:#92400E;}
-.demo-banner.hidden{display:none;}
-.demo-dot{width:8px;height:8px;border-radius:50%;background:var(--amber);flex-shrink:0;}
+
+
 
 @media(max-width:900px){
   .input-grid{grid-template-columns:1fr;}
@@ -292,10 +291,7 @@ nav{position:sticky;top:0;z-index:100;padding:18px 48px;display:flex;justify-con
     <div class="error-box" id="error-box">
       <p id="error-text">Something went wrong. Please try again.</p>
     </div>
-    <div class="demo-banner hidden" id="demo-banner">
-      <div class="demo-dot"></div>
-      <span>Demo mode: showing example analysis for this pivot. Open in Claude.ai for a live AI-powered result tailored to your exact roles.</span>
-    </div>
+
   </div>
 
   <!-- LOADING -->
@@ -889,9 +885,6 @@ function renderResults(data, from, to) {
   renderHonest(data);
   renderResources(data);
 
-  // Show demo banner if not on claude platform
-  const onLive = window.location.hostname.includes('claude.ai') || window.location.hostname.includes('anthropic.com') || window.location.protocol === 'blob:';
-  document.getElementById('demo-banner').classList.toggle('hidden', onLive);
   document.getElementById('results').classList.add('show');
   setTimeout(() => document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'}), 100);
 }
