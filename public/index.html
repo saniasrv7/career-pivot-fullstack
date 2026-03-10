@@ -1115,7 +1115,7 @@ function renderResources(data) {
           <div class="resource-item">
             <div class="res-icon">${item.icon}</div>
             <div class="res-body">
-              <a href="https://www.google.com/search?q=${encodeURIComponent(item.name)}" target="_blank" rel="noopener" class="res-name">${item.name}</a>
+              <a href="${item.url || 'https://www.google.com/search?q=' + encodeURIComponent(item.name)}" target="_blank" rel="noopener" class="res-name">${item.name}</a>
               <div class="res-desc">${item.desc}</div>
               <span class="res-tag">${item.tag}</span>
             </div>
